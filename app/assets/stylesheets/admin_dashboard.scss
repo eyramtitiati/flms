@@ -1,0 +1,81 @@
+@import "bootstrap";
+
+/* Sidebar styles */
+.sidebar {
+    width: 4.5rem; /* Fixed width for sidebar */
+    min-height: 100vh; /* Full height */
+    background-color: #343a40; /* Dark background for sidebar */
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* Make sidebar fixed */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .sidebar .nav-link {
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar .nav-link.active {
+    background-color: #0d6efd; /* Active link background color */
+  }
+  
+  .sidebar .nav-link:hover {
+    background-color: #495057; /* Hover background color */
+  }
+  
+  /* Align dropdown to the bottom */
+  .sidebar .dropdown {
+    margin-top: auto;
+  }
+  
+  /* Content styles */
+  .flex-grow-1 {
+    margin-left: 4.5rem; /* Ensure content doesn't overlap with sidebar */
+    padding: 1rem;
+    width: calc(100% - 4.5rem); /* Adjust content width to accommodate sidebar */
+  }
+  
+  /* Ensure the content adjusts properly for small screens */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%; /* Full width sidebar on small screens */
+      height: auto; /* Let sidebar height adjust to content */
+      position: static; /* Sidebar becomes static on small screens */
+      border-bottom: 1px solid #ddd; /* Separate sidebar from content */
+    }
+  
+    .flex-grow-1 {
+      margin-left: 0; /* No margin on small screens */
+      padding: 1rem; /* Add padding for better spacing */
+      width: 100%; /* Ensure content takes full width */
+    }
+  
+    .card {
+      margin-bottom: 1rem; /* Add margin for better spacing between cards */
+    }
+  }
+  
+  /* Additional media queries for smaller devices */
+  @media (max-width: 576px) {
+    .sidebar {
+      width: 100%; /* Full width sidebar on extra small screens */
+      position: static; /* Sidebar becomes static on extra small screens */
+    }
+  
+    .flex-grow-1 {
+      padding: 0.5rem; /* Reduce padding on extra small screens */
+    }
+  
+    .card-header, .card-body {
+      text-align: center; /* Center text in cards on extra small screens */
+    }
+  
+    h1 {
+      font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+  }
+  
