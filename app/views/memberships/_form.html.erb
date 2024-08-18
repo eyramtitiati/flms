@@ -1,7 +1,7 @@
 <!-- app/views/memberships/_form.html.erb -->
-<%= form_with(model: membership, local: true, html: { id: "membership-form" }) do |form| %>
+<%= form_with(model: membership, local: true, html: { class: "row g-3", id: "membership-form" }) do |form| %>
   <% if membership.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(membership.errors.count, "error") %> prohibited this membership from being saved:</h2>
       <ul>
         <% membership.errors.full_messages.each do |message| %>
@@ -11,87 +11,94 @@
     </div>
   <% end %>
 
-  <div class="mb-3">
-    <%= form.label :first_name %>
-    <%= form.text_field :first_name, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :first_name, class: "form-label" %>
+    <%= form.text_field :first_name, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :last_name, class: "form-label" %>
+    <%= form.text_field :last_name, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :phone %>
-    <%= form.text_field :phone, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :phone, class: "form-label" %>
+    <%= form.text_field :phone, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :email %>
-    <%= form.email_field :email, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.email_field :email, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :partner_first_name, "Partner's First Name" %>
-    <%= form.text_field :partner_first_name, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :partner_first_name, "Partner's First Name", class: "form-label" %>
+    <%= form.text_field :partner_first_name, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :partner_last_name, "Partner's Last Name" %>
-    <%= form.text_field :partner_last_name, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :partner_last_name, "Partner's Last Name", class: "form-label" %>
+    <%= form.text_field :partner_last_name, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :partner_phone, "Partner's Phone Number" %>
-    <%= form.text_field :partner_phone, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :partner_phone, "Partner's Phone Number", class: "form-label" %>
+    <%= form.text_field :partner_phone, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :partner_email, "Partner's Email Address" %>
-    <%= form.email_field :partner_email, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :partner_email, "Partner's Email Address", class: "form-label" %>
+    <%= form.email_field :partner_email, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :pastor_name, "Pastor's Name" %>
-    <%= form.text_field :pastor_name, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :pastor_name, "Pastor's Name", class: "form-label" %>
+    <%= form.text_field :pastor_name, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :partner_pastor_name, "Partner's Pastor Name" %>
-    <%= form.text_field :partner_pastor_name, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :partner_pastor_name, "Partner's Pastor Name", class: "form-label" %>
+    <%= form.text_field :partner_pastor_name, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :ministry %>
-    <%= form.text_field :ministry, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :ministry, class: "form-label" %>
+    <%= form.text_field :ministry, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :partner_ministry, "Partner's Ministry" %>
-    <%= form.text_field :partner_ministry, class: 'form-control' %>
+  <div class="col-md-6">
+    <%= form.label :partner_ministry, "Partner's Ministry", class: "form-label" %>
+    <%= form.text_field :partner_ministry, class: "form-control" %>
   </div>
 
-  <div class="mb-3">
-    <%= form.label :lab_results, "Upload Lab Results" %>
-    <%= form.file_field :lab_results, class: 'form-control' %>
+  <div class="col-12">
+    <%= form.label :lab_results, "Upload Lab Results", class: "form-label" %>
+    <%= form.file_field :lab_results, class: "form-control" %>
   </div>
 
   <% if current_user.admin? %>
-    <div class="mb-3">
-      <%= form.label :status %>
-      <%= form.select :status, options_for_select(['Pending', 'Confirmed'], membership.status), class: 'form-control' %>
+    <div class="col-12">
+        <%= form.label :status, class: "form-label" %>
+        <select class="form-select" aria-label="Select membership status" name="membership[status]" id="membership_status">
+        <option selected disabled>Select status</option>
+        <option value="Pending" <%= 'selected' if membership.status == 'Pending' %>>Pending</option>
+        <option value="Confirmed" <%= 'selected' if membership.status == 'Confirmed' %>>Confirmed</option>
+        </select>
     </div>
-    <%= form.submit "Submit", class: "btn btn-primary" %>
-  <% else %>
-    <%= form.submit "Make Payment and Submit", class: "btn btn-primary", id: "payment-submit" %>
   <% end %>
+
+  <div class="col-12">
+    <% if current_user.admin? %>
+      <%= form.submit "Submit", class: "btn btn-primary" %>
+    <% else %>
+      <%= form.submit "Make Payment and Submit", class: "btn btn-primary", id: "payment-submit" %>
+    <% end %>
+  </div>
 <% end %>
 
 <script>
   document.getElementById('payment-submit').addEventListener('click', function(event) {
     event.preventDefault(); // Prevent the form from submitting immediately
-
-    // Submit the form by targeting the form with the correct ID
-    document.getElementById('membership-form').submit();
+    document.getElementById('membership-form').submit(); // Submit the form
   });
 </script>
