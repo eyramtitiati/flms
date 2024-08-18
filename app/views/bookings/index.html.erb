@@ -1,0 +1,29 @@
+<% if @venue %>
+  <h1>Bookings for <%= @venue.name %></h1>
+<% else %>
+  <h1>All Bookings</h1>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Booking Date</th>
+      <th>Venue</th>
+      <th>User</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bookings.each do |booking| %>
+      <tr>
+        <td><%= booking.booking_date %></td>
+        <td><%= booking.venue.name %></td>
+        <td><%= booking.user.email %></td>
+        <td>
+          <%= link_to 'Edit', edit_venue_booking_path(booking.venue, booking), class: 'btn btn-secondary btn-sm' %>
+          <%= link_to 'Delete', venue_booking_path(booking.venue, booking), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

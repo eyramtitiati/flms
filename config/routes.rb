@@ -1,8 +1,8 @@
-# config/routes.rb
 Rails.application.routes.draw do
   get "home/index"
   devise_for :users
 
+  # Routes for memberships with custom payment actions
   resources :memberships do
     member do
       get 'flutterwave_payment', to: 'memberships#flutterwave_payment'
@@ -10,14 +10,37 @@ Rails.application.routes.draw do
       get 'payment_cancel', to: 'memberships#payment_cancel'
     end
   end
+
+  # Routes for venues and nested bookings
+  resources :venues do
+    resources :bookings, only: [:index, :new, :create, :edit, :update, :destroy]
+  end
+
+  # Route for fetching available dates for a location
+  resources :locations do
+    member do
+      get 'available_dates', to: 'locations#available_dates'
+    end
+  end
+
+  # Global bookings route (admin view all bookings)
+  get 'bookings', to: 'bookings#index', as: 'all_bookings'
+
+  # Routes for locations with admin destroy action
+  resources :locations, except: [:destroy]
+
   # Root path redirects to the user login page
   root to: redirect('/users/sign_in')
 
+  # Home page route
   get '/home', to: 'home#index', as: 'home'
 
+  # Admin namespace for users, locations, and venues
   namespace :admin do
     root to: 'dashboard#index'  # Admin dashboard root
     resources :users
+    resources :locations, only: [:destroy]
+    resources :venues, only: [:destroy]
   end
 
   # Ensure the admin login path works as well

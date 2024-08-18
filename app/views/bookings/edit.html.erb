@@ -1,0 +1,14 @@
+<h1>Edit Booking</h1>
+
+<%= form_with(model: [@venue, @booking], local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :booking_date, class: "form-label" %>
+    <%= form.date_field :booking_date, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Update Booking", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to 'Cancel', venue_bookings_path(@venue), class: 'btn btn-secondary mt-3' %>

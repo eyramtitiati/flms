@@ -1,6 +1,6 @@
 # app/controllers/admin/users_controller.rb
 class Admin::UsersController < Admin::BaseController
-  layout 'admin'  # Ensure it uses the admin layout
+  layout 'admin'
 
   before_action :set_user, only: [:edit, :update, :destroy]
 
@@ -15,7 +15,6 @@ class Admin::UsersController < Admin::BaseController
   def create
     @user = User.new(user_params)
     if @user.save
-      update_user_roles(@user)  # Assign roles
       redirect_to admin_users_path, notice: 'User was successfully created.'
     else
       render :new
@@ -27,7 +26,6 @@ class Admin::UsersController < Admin::BaseController
 
   def update
     if @user.update(user_params)
-      update_user_roles(@user)  # Update roles
       redirect_to admin_users_path, notice: 'User was successfully updated.'
     else
       render :edit
@@ -46,16 +44,6 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, role_ids: [])
-  end
-
-  def update_user_roles(user)
-    user.roles.clear
-    role_ids = params[:user][:role_ids]
-    role_ids.each do |role_id|
-      next if role_id.blank?
-      role = Role.find(role_id)
-      user.add_role(role.name)
-    end
+    params.require(:user).permit(:email, :password, :password_confirmation, :role)
   end
 end

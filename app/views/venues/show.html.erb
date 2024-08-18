@@ -1,0 +1,28 @@
+<h1><%= @venue.name %> - Details</h1>
+
+<p><strong>Location:</strong> <%= @venue.location.name %></p>
+
+<h2>Bookings</h2>
+
+<% if current_user.admin? %>
+  <%= link_to 'New Booking', new_venue_booking_path(@venue), class: 'btn btn-primary mb-3' %>
+<% end %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Booking Date</th>
+      <th>User</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bookings.each do |booking| %>
+      <tr>
+        <td><%= booking.booking_date %></td>
+        <td><%= booking.user.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back to Venues', venues_path, class: 'btn btn-secondary' %>

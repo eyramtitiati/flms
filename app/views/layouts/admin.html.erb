@@ -38,15 +38,27 @@
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link py-3">
-              <i class="bi bi-speedometer2"></i>
-              <span class="visually-hidden">Analytics</span>
-            </a>
-          </li>
-          <li>
             <a href="<%= memberships_path %>" class="nav-link py-3 <%= 'active' if current_page?(memberships_path) || current_page?(new_membership_path) || request.fullpath.include?('/memberships/') %>">
               <i class="bi bi-table"></i>
               <span class="visually-hidden">Memberships</span>
+            </a>
+          </li>
+          <li>
+            <a href="<%= venues_path %>" class="nav-link py-3 <%= 'active' if current_page?(venues_path) || current_page?(new_venue_path) %>">
+              <i class="bi bi-geo-alt"></i>
+              <span class="visually-hidden">Venues</span>
+            </a>
+          </li>
+          <li>
+            <a href="<%= locations_path %>" class="nav-link py-3 <%= 'active' if current_page?(locations_path) || current_page?(new_location_path) %>">
+              <i class="bi bi-map"></i>
+              <span class="visually-hidden">Locations</span>
+            </a>
+          </li>
+          <li>
+            <a href="<%= all_bookings_path %>" class="nav-link py-3 <%= 'active' if current_page?(all_bookings_path) %>">
+              <i class="bi bi-calendar-check"></i>
+              <span class="visually-hidden">Bookings</span>
             </a>
           </li>
           <li>
