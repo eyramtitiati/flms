@@ -22,11 +22,43 @@
   
     <div class="mb-3">
       <%= form.label :booking_date %>
-      <%= form.date_field :booking_date, class: "form-control" %>
+      <div class="input-group date" id="datepicker">
+        <%= form.text_field :booking_date, class: "form-control" %>
+        <span class="input-group-append">
+          <span class="input-group-text bg-light d-block">
+            <i class="bi bi-calendar"></i>
+          </span>
+        </span>
+      </div>
     </div>
   
     <div class="actions">
       <%= form.submit class: "btn btn-primary" %>
     </div>
   <% end %>
+  
+  <script>
+    $(function(){
+      // Assuming @booked_dates is passed from the controller as an array of date strings
+      var bookedDates = <%= @booked_dates.to_json.html_safe %>;
+  
+      $('#datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        beforeShowDay: function(date){
+          var formattedDate = date.toISOString().split('T')[0];
+          if (bookedDates.includes(formattedDate)) {
+            return {classes: 'booked-date', tooltip: 'Already booked'};
+          }
+        }
+      });
+    });
+  </script>
+  
+  <style>
+    .booked-date {
+      background-color: #f8d7da !important;
+      color: #721c24 !important;
+      cursor: not-allowed;
+    }
+  </style>
   

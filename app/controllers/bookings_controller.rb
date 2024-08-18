@@ -15,8 +15,11 @@ class BookingsController < ApplicationController
     end
   
     def new
-      @booking = Booking.new
-    end
+        @booking = Booking.new
+        @venues = Venue.all
+        @booked_dates = Booking.where(venue_id: params[:venue_id]).pluck(:booking_date).map(&:to_s)
+      end
+      
   
     def create
       @booking = Booking.new(booking_params)
