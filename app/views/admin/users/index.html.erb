@@ -1,0 +1,25 @@
+<!-- app/views/admin/users/index.html.erb -->
+<h1>Users</h1>
+
+<%= link_to 'New User', new_admin_user_path, class: 'btn btn-primary' %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Roles</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.role.titleize %></td> <!-- Directly access the role attribute -->
+        <td><%= link_to 'Edit', edit_admin_user_path(user), class: 'btn btn-secondary' %></td>
+        <td><%= link_to 'Delete', admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

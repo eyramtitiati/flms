@@ -1,0 +1,31 @@
+<!-- app/views/memberships/show.html.erb -->
+<h1>Membership Details</h1>
+
+<p><strong>First Name:</strong> <%= @membership.first_name %></p>
+<p><strong>Last Name:</strong> <%= @membership.last_name %></p>
+<p><strong>Phone:</strong> <%= @membership.phone %></p>
+<p><strong>Email:</strong> <%= @membership.email %></p>
+<p><strong>Partner's First Name:</strong> <%= @membership.partner_first_name %></p>
+<p><strong>Partner's Last Name:</strong> <%= @membership.partner_last_name %></p>
+<p><strong>Partner's Phone:</strong> <%= @membership.partner_phone %></p>
+<p><strong>Partner's Email:</strong> <%= @membership.partner_email %></p>
+<p><strong>Pastor's Name:</strong> <%= @membership.pastor_name %></p>
+<p><strong>Partner's Pastor Name:</strong> <%= @membership.partner_pastor_name %></p>
+<p><strong>Ministry:</strong> <%= @membership.ministry %></p>
+<p><strong>Partner's Ministry:</strong> <%= @membership.partner_ministry %></p>
+<p><strong>Status:</strong> <%= @membership.status %></p>
+
+<% if @membership.lab_results.attached? %>
+  <p><strong>Lab Results:</strong> 
+    <%= link_to 'Download Lab Results', rails_blob_path(@membership.lab_results, disposition: "attachment"), class: 'btn btn-primary' %>
+  </p>
+  <p>
+    <%= image_tag @membership.lab_results, class: 'img-fluid' if @membership.lab_results.content_type.start_with?('image/') %>
+  </p>
+<% else %>
+  <p>No lab results uploaded.</p>
+<% end %>
+
+<%= link_to 'Edit', edit_membership_path(@membership), class: 'btn btn-primary' %>
+<%= link_to 'Back', memberships_path, class: 'btn btn-secondary' %>
+<%= link_to 'Delete', @membership, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>

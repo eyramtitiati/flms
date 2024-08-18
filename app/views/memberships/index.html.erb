@@ -1,0 +1,45 @@
+<!-- app/views/memberships/index.html.erb -->
+<h1>Membership Registrations</h1>
+
+<%= link_to 'New Membership', new_membership_path, class: 'btn btn-primary' %>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Partner's First Name</th>
+      <th>Partner's Last Name</th>
+      <th>Status</th>
+      <th>Lab Results</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @memberships.each do |membership| %>
+      <tr>
+        <td><%= membership.first_name %></td>
+        <td><%= membership.last_name %></td>
+        <td><%= membership.phone %></td>
+        <td><%= membership.email %></td>
+        <td><%= membership.partner_first_name %></td>
+        <td><%= membership.partner_last_name %></td>
+        <td><%= membership.status %></td>
+        <td>
+          <% if membership.lab_results.attached? %>
+            <%= link_to 'View', rails_blob_path(membership.lab_results), target: "_blank" %>
+          <% else %>
+            Not Uploaded
+          <% end %>
+        </td>
+        <td>
+          <%= link_to 'Show', membership, class: 'btn btn-info' %>
+          <%= link_to 'Edit', edit_membership_path(membership), class: 'btn btn-secondary' %>
+          <%= link_to 'Delete', membership, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
