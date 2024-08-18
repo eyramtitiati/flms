@@ -1,8 +1,12 @@
-<% if @venue %>
-  <h1>Bookings for <%= @venue.name %></h1>
-<% else %>
-  <h1>All Bookings</h1>
-<% end %>
+<h1>
+  <% if @venue %>
+    Bookings for <%= @venue.name %>
+  <% else %>
+    All Bookings
+  <% end %>
+</h1>
+
+<%= link_to 'New Booking', @venue ? new_venue_booking_path(@venue) : new_booking_path, class: "btn btn-primary mb-3" %>
 
 <table class="table table-striped">
   <thead>

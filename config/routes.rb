@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   # Routes for locations with admin destroy action
   resources :locations, except: [:destroy]
+  resources :bookings, only: [:new, :create]
 
   # Root path redirects to the user login page
   root to: redirect('/users/sign_in')
