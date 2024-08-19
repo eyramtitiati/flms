@@ -9,6 +9,7 @@
     <tr>
       <th>Name</th>
       <th>Location</th>
+      <th>Price (GHC)</th>
       <% if current_user.admin? %>
         <th>Actions</th>
       <% end %>
@@ -19,6 +20,7 @@
       <tr>
         <td><%= link_to venue.name, venue_path(venue) %></td>
         <td><%= venue.location.name %></td>
+        <td><%= number_to_currency(venue.price, unit: "GHC ") %></td>
         <% if current_user.admin? %>
           <td>
             <%= link_to 'Edit', edit_venue_path(venue), class: 'btn btn-secondary' %>

@@ -11,82 +11,109 @@
     </div>
   <% end %>
 
+  <!-- Male Information -->
   <div class="col-md-6">
-    <%= form.label :first_name, class: "form-label" %>
-    <%= form.text_field :first_name, class: "form-control" %>
-  </div>
-
-  <div class="col-md-6">
-    <%= form.label :last_name, class: "form-label" %>
-    <%= form.text_field :last_name, class: "form-control" %>
+    <%= form.label :first_name, "Name (Male)", class: "form-label" %> *
+    <%= form.text_field :first_name, class: "form-control", required: true %>
   </div>
 
   <div class="col-md-6">
-    <%= form.label :phone, class: "form-label" %>
-    <%= form.text_field :phone, class: "form-control" %>
+    <%= form.label :email, "Email Address (Male)", class: "form-label" %> *
+    <%= form.email_field :email, class: "form-control", required: true %>
   </div>
 
   <div class="col-md-6">
-    <%= form.label :email, class: "form-label" %>
-    <%= form.email_field :email, class: "form-control" %>
+    <%= form.label :male_birth_date, "Date of Birth (Male)", class: "form-label" %> *
+    <%= form.date_field :male_birth_date, class: "form-control", required: true %>
   </div>
 
   <div class="col-md-6">
-    <%= form.label :partner_first_name, "Partner's First Name", class: "form-label" %>
-    <%= form.text_field :partner_first_name, class: "form-control" %>
+    <%= form.label :phone, "Phone Number (Whatsapp) Male", class: "form-label" %> *
+    <%= form.text_field :phone, class: "form-control", required: true %>
   </div>
 
   <div class="col-md-6">
-    <%= form.label :partner_last_name, "Partner's Last Name", class: "form-label" %>
-    <%= form.text_field :partner_last_name, class: "form-control" %>
+    <%= form.label :male_place_of_birth, "Place of Birth (Male)", class: "form-label" %> *
+    <%= form.text_field :male_place_of_birth, class: "form-control", required: true %>
   </div>
 
   <div class="col-md-6">
-    <%= form.label :partner_phone, "Partner's Phone Number", class: "form-label" %>
-    <%= form.text_field :partner_phone, class: "form-control" %>
+    <%= form.label :male_residential_address, "Residential Address (Male)", class: "form-label" %> *
+    <%= form.text_field :male_residential_address, class: "form-control", required: true %>
   </div>
 
   <div class="col-md-6">
-    <%= form.label :partner_email, "Partner's Email Address", class: "form-label" %>
-    <%= form.email_field :partner_email, class: "form-control" %>
+    <%= form.label :male_born_again, "Are You Born Again (Male)", class: "form-label" %> *
+    <%= form.select :male_born_again, [['Yes', 'Yes'], ['No', 'No']], { prompt: 'Select an Option' }, class: "form-control", required: true %>
   </div>
 
   <div class="col-md-6">
-    <%= form.label :pastor_name, "Pastor's Name", class: "form-label" %>
-    <%= form.text_field :pastor_name, class: "form-control" %>
+    <%= form.label :male_born_again_date, "If Yes, when? (Male)", class: "form-label" %>
+    <%= form.text_field :male_born_again_date, class: "form-control" %>
+  </div>
+
+  <div class="col-md-12">
+    <%= form.label :male_born_again_reason, "If No, why? (Male). Type N/A if this does not apply.", class: "form-label" %> *
+    <%= form.text_area :male_born_again_reason, class: "form-control", required: true %>
   </div>
 
   <div class="col-md-6">
-    <%= form.label :partner_pastor_name, "Partner's Pastor Name", class: "form-label" %>
-    <%= form.text_field :partner_pastor_name, class: "form-control" %>
+    <%= form.label :male_passport_picture, "Passport Picture (Male)", class: "form-label" %> *
+    <%= form.file_field :male_passport_picture, class: "form-control", required: true %>
+  </div>
+
+  <!-- Female Information -->
+  <div class="col-md-6">
+    <%= form.label :partner_first_name, "Name (Female)", class: "form-label" %> *
+    <%= form.text_field :partner_first_name, class: "form-control", required: true %>
   </div>
 
   <div class="col-md-6">
-    <%= form.label :ministry, class: "form-label" %>
-    <%= form.text_field :ministry, class: "form-control" %>
+    <%= form.label :partner_email, "Email Address (Female)", class: "form-label" %> *
+    <%= form.email_field :partner_email, class: "form-control", required: true %>
   </div>
 
   <div class="col-md-6">
-    <%= form.label :partner_ministry, "Partner's Ministry", class: "form-label" %>
-    <%= form.text_field :partner_ministry, class: "form-control" %>
+    <%= form.label :female_birth_date, "Date of Birth (Female)", class: "form-label" %> *
+    <%= form.date_field :female_birth_date, class: "form-control", required: true %>
   </div>
 
-  <div class="col-12">
-    <%= form.label :lab_results, "Upload Lab Results", class: "form-label" %>
-    <%= form.file_field :lab_results, class: "form-control" %>
+  <div class="col-md-6">
+    <%= form.label :partner_phone, "Phone Number (Whatsapp) Female", class: "form-label" %> *
+    <%= form.text_field :partner_phone, class: "form-control", required: true %>
   </div>
 
-  <% if current_user.admin? %>
-    <div class="col-12">
-        <%= form.label :status, class: "form-label" %>
-        <select class="form-select" aria-label="Select membership status" name="membership[status]" id="membership_status">
-        <option selected disabled>Select status</option>
-        <option value="Pending" <%= 'selected' if membership.status == 'Pending' %>>Pending</option>
-        <option value="Confirmed" <%= 'selected' if membership.status == 'Confirmed' %>>Confirmed</option>
-        </select>
-    </div>
-  <% end %>
+  <div class="col-md-6">
+    <%= form.label :female_place_of_birth, "Place of Birth (Female)", class: "form-label" %> *
+    <%= form.text_field :female_place_of_birth, class: "form-control", required: true %>
+  </div>
 
+  <div class="col-md-6">
+    <%= form.label :female_residential_address, "Residential Address (Female)", class: "form-label" %> *
+    <%= form.text_field :female_residential_address, class: "form-control", required: true %>
+  </div>
+
+  <div class="col-md-6">
+    <%= form.label :female_born_again, "Are You Born Again (Female)", class: "form-label" %> *
+    <%= form.select :female_born_again, [['Yes', 'Yes'], ['No', 'No']], { prompt: 'Select an Option' }, class: "form-control", required: true %>
+  </div>
+
+  <div class="col-md-6">
+    <%= form.label :female_born_again_date, "If Yes, when? (Female)", class: "form-label" %>
+    <%= form.text_field :female_born_again_date, class: "form-control" %>
+  </div>
+
+  <div class="col-md-12">
+    <%= form.label :female_born_again_reason, "If No, why? (Female). Type N/A if this does not apply.", class: "form-label" %> *
+    <%= form.text_area :female_born_again_reason, class: "form-control", required: true %>
+  </div>
+
+  <div class="col-md-6">
+    <%= form.label :female_passport_picture, "Passport Picture (Female)", class: "form-label" %> *
+    <%= form.file_field :female_passport_picture, class: "form-control", required: true %>
+  </div>
+
+  <!-- Submit Button -->
   <div class="col-12">
     <% if current_user.admin? %>
       <%= form.submit "Submit", class: "btn btn-primary" %>

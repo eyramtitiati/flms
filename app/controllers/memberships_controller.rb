@@ -4,7 +4,8 @@ class MembershipsController < ApplicationController
     before_action :set_membership, only: [:show, :edit, :update, :destroy, :flutterwave_payment, :payment_success, :payment_cancel]
     before_action :authorize_user!, only: [:edit, :update, :destroy]
   
-    layout 'admin', if: -> { current_user.admin? }
+    # Apply the layout based on the user role
+    layout :determine_layout
   
     def index
       @memberships = current_user.admin? ? Membership.all : current_user.memberships
@@ -95,9 +96,15 @@ class MembershipsController < ApplicationController
   
     def membership_params
       permitted_params = [
-        :first_name, :last_name, :phone, :email, :partner_first_name,
-        :partner_last_name, :partner_phone, :partner_email, :pastor_name,
-        :partner_pastor_name, :ministry, :partner_ministry, :lab_results
+        :first_name, :last_name, :phone, :email,
+        :partner_first_name, :partner_last_name, :partner_phone, :partner_email,
+        :male_birth_date, :female_birth_date,
+        :male_place_of_birth, :female_place_of_birth,
+        :male_residential_address, :female_residential_address,
+        :male_born_again, :female_born_again,
+        :male_born_again_date, :female_born_again_date,
+        :male_born_again_reason, :female_born_again_reason,
+        :male_passport_picture, :female_passport_picture
       ]
   
       permitted_params << :status if current_user.admin?
@@ -109,6 +116,11 @@ class MembershipsController < ApplicationController
       unless current_user.admin? || @membership.user == current_user
         redirect_to memberships_path, alert: 'You are not authorized to perform this action.'
       end
+    end
+  
+    # Determines which layout to use based on the user's role
+    def determine_layout
+      current_user.admin? ? 'admin' : 'application'
     end
 end
   

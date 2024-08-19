@@ -13,7 +13,11 @@ Rails.application.routes.draw do
 
   # Routes for venues and nested bookings
   resources :venues do
-    resources :bookings, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :bookings do
+      member do
+        get 'payment_success', to: 'bookings#payment_success'
+      end
+    end
   end
 
   # Route for fetching available dates for a location
@@ -42,6 +46,9 @@ Rails.application.routes.draw do
     resources :users
     resources :locations, only: [:destroy]
     resources :venues, only: [:destroy]
+    
+    # Singleton resource for payment settings
+    resources :payment_settings, only: [:index, :edit, :update]
   end
 
   # Ensure the admin login path works as well

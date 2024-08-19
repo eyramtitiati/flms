@@ -20,6 +20,11 @@
       <%= form.collection_select :location_id, Location.all, :id, :name, { prompt: "Select Location" }, { class: "form-control" } %>
     </div>
   
+    <div class="mb-3">
+      <%= form.label :price, "Price (GHC)" %>
+      <%= form.text_field :price, class: "form-control" %>
+    </div>
+  
     <div class="actions">
       <%= form.submit class: "btn btn-primary" %>
     </div>

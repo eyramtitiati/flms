@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_18_211802) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_19_215422) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,7 +89,28 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_18_211802) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status", default: "Pending"
+    t.date "male_birth_date"
+    t.date "female_birth_date"
+    t.string "male_place_of_birth"
+    t.string "female_place_of_birth"
+    t.string "male_residential_address"
+    t.string "female_residential_address"
+    t.string "male_born_again"
+    t.string "female_born_again"
+    t.string "male_born_again_date"
+    t.string "female_born_again_date"
+    t.text "male_born_again_reason"
+    t.text "female_born_again_reason"
+    t.string "male_passport_picture"
+    t.string "female_passport_picture"
     t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "payment_settings", force: :cascade do |t|
+    t.string "key"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -110,6 +131,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_18_211802) do
     t.bigint "location_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "price", precision: 10, scale: 2
     t.index ["location_id"], name: "index_venues_on_location_id"
   end
 

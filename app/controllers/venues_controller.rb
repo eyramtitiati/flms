@@ -3,7 +3,7 @@ class VenuesController < ApplicationController
     before_action :set_venue, only: [:show, :edit, :update, :destroy]
   
     layout 'admin', if: -> { current_user.admin? }
-    
+
     def index
       @venues = Venue.all
     end
@@ -48,7 +48,7 @@ class VenuesController < ApplicationController
     end
   
     def venue_params
-      params.require(:venue).permit(:name, :location_id)
+      params.require(:venue).permit(:name, :location_id, :price)
     end
   end
   

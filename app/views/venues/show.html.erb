@@ -1,6 +1,7 @@
 <h1><%= @venue.name %> - Details</h1>
 
 <p><strong>Location:</strong> <%= @venue.location.name %></p>
+<p><strong>Price:</strong> <%= number_to_currency(@venue.price, unit: "GHC ") %></p>
 
 <h2>Bookings</h2>
 

@@ -1,0 +1,29 @@
+<!-- app/views/admin/payment_settings/index.html.erb -->
+<h1>Payment Settings</h1>
+
+<% if @payment_settings.present? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @payment_settings.each do |setting| %>
+        <tr>
+          <td><%= setting.key %></td>
+          <td><%= setting.value %></td>
+          <td>
+            <%= link_to 'Edit', edit_admin_payment_setting_path(setting), class: 'btn btn-secondary btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No payment settings found.</p>
+<% end %>
+
+<%= link_to 'Back', admin_root_path, class: 'btn btn-secondary mt-3' %>

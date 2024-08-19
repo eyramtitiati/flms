@@ -1,6 +1,41 @@
 <!-- app/views/memberships/new.html.erb -->
 <h1>New Membership Registration</h1>
 
+<!-- Registration Information Modal -->
+<% unless current_user.admin? %>
+  <div class="modal fade" id="registrationInfoModal" tabindex="-1" aria-labelledby="registrationInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registrationInfoModalLabel">Marriage Lab Registration Form</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>This Form Is Required To Be Filled Out Fully As Part Of Your Application To Be Counselled By The First Love Marriage School.</p>
+          <p>To Complete This Form, The Following Will Be Required:</p>
+          <ul>
+            <li>A Scanned Copy Of A Passport Picture On A White Background</li>
+            <li>A Scanned Copy Of Your Required Medical (We Only Recommend That You Do The Suggested Tests And Share them With Us)</li>
+            <li>Payment Of GHC 500.00 For The Couple</li>
+            <li>A Bible</li>
+            <li>A Copy Of The Model Marriage Book By Bishop Dag Heward-Mills</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var registrationInfoModal = new bootstrap.Modal(document.getElementById('registrationInfoModal'));
+      registrationInfoModal.show();
+    });
+  </script>
+<% end %>
+
 <%= render 'form', membership: @membership %>
 
 <%= link_to 'Back', memberships_path, class: 'btn btn-secondary mt-3' %>
