@@ -1,13 +1,4 @@
-<!-- app/views/admin/payment_settings/edit.html.erb -->
-<h1>Payment Settings</h1>
-
-<%= form_with(model: [:admin, @payment_setting], local: true) do |form| %>
-  <div class="mb-3">
-    <%= form.label :value, "Membership Registration Fee (GHC)" %>
-    <%= form.text_field :value, class: "form-control" %>
-  </div>
-
-  <%= form.submit "Update Payment Setting", class: "btn btn-primary" %>
+<%= form_with(model: @membership, local: true) do |form| %>
+    <%= render 'form', membership: @membership %>
 <% end %>
-
-<%= link_to 'Back', admin_root_path, class: 'btn btn-secondary mt-3' %>
+  

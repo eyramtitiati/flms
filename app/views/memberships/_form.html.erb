@@ -122,7 +122,7 @@
       <%= form.file_field :female_passport_picture, class: "form-control", required: true %>
     </div>
   
-    <!-- Other Required Fields -->
+    <!-- Additional Information -->
     <div class="col-md-6">
       <%= form.label :pastor_name, "Pastor's Name", class: "form-label" %> *
       <%= form.text_field :pastor_name, class: "form-control", required: true %>
@@ -159,8 +159,9 @@
 <% end %>
   
 <script>
-document.getElementById('payment-submit').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the form from submitting immediately
-    document.getElementById('membership-form').submit(); // Submit the form
-});
+    document.getElementById('payment-submit').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent the form from submitting immediately
+      document.getElementById('membership-form').submit(); // Submit the form
+    });
 </script>
+  

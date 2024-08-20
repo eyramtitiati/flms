@@ -58,6 +58,9 @@ class MembershipsController < ApplicationController
       else
         render :edit
       end
+    rescue ActiveSupport::MessageVerifier::InvalidSignature => e
+      flash[:error] = "There was an error with the request: #{e.message}"
+      redirect_to memberships_path
     end
   
     def destroy
@@ -104,7 +107,8 @@ class MembershipsController < ApplicationController
         :male_born_again, :female_born_again,
         :male_born_again_date, :female_born_again_date,
         :male_born_again_reason, :female_born_again_reason,
-        :male_passport_picture, :female_passport_picture
+        :male_passport_picture, :female_passport_picture, :pastor_name,
+        :partner_pastor_name, :ministry, :partner_ministry, :lab_results
       ]
   
       permitted_params << :status if current_user.admin?
